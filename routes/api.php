@@ -38,3 +38,7 @@ Route::post('/login', function (Request $request) {
 
     return $user->createToken('token')->plainTextToken;
 })->name('login');
+
+//Invitation routes
+Route::post('send_invitation',[\App\Http\Controllers\InvitationController::class,'sendInvitation'])
+    ->name('sendInvitation');
