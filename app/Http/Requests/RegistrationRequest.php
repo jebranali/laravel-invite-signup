@@ -29,6 +29,7 @@ class RegistrationRequest extends FormRequest
             'invitation_token' => 'required',
             'user_name' => 'required|min:4|max:20',
             'password' => 'required|min:6',
+            'name' => 'required',
         ];
     }
 
