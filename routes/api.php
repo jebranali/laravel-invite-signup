@@ -42,3 +42,7 @@ Route::post('/login', function (Request $request) {
 //Invitation routes
 Route::post('send_invitation',[\App\Http\Controllers\InvitationController::class,'sendInvitation'])
     ->name('sendInvitation');
+
+//Registration route
+Route::post('registration',[\App\Http\Controllers\UserController::class,'register'])
+    ->name('register');
