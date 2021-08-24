@@ -17,8 +17,15 @@ use Illuminate\Validation\ValidationException;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+//Auth protected routes.
+Route::middleware('auth:sanctum')->group(function () {
+
+    //Get authenticated user
+    Route::get('get_user', [\App\Http\Controllers\ProfileController::class,'getUser'])->name('getUser');
+
+    //Update profile
+    Route::post('profile_update', [\App\Http\Controllers\ProfileController::class,'profileUpdate'])->name('profilUpdate');
+
 });
 
 //Api authentication
