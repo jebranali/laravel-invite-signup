@@ -51,4 +51,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function generatePinCode()
+    {
+        $this->pin_code = mt_rand(1000,9999);
+    }
 }
