@@ -31,3 +31,7 @@ Route::post('send_invitation',[\App\Http\Controllers\InvitationController::class
 //Registration route
 Route::post('registration',[\App\Http\Controllers\UserController::class,'register'])
     ->name('register');
+
+//Verify pin code
+Route::post('verify_pin',[\App\Http\Controllers\UserController::class,'verifyPin'])
+    ->name('verifyPin');
