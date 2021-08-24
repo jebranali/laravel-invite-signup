@@ -63,6 +63,12 @@ class UserController extends Controller
             ]);
         }
 
+        if($user && $user->pin_code != null){
+            throw ValidationException::withMessages([
+                'pin_code' => ['Kindly verify pin code'],
+            ]);
+        }
+
         return $user->createToken('token')->plainTextToken;
     }
 
