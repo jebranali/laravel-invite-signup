@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegistrationRequest;
+use App\Http\Requests\VerifyPinRequest;
 use App\Mail\PinCode;
 use App\Models\Invitation;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -62,5 +64,27 @@ class UserController extends Controller
         }
 
         return $user->createToken('token')->plainTextToken;
+    }
+
+    /**
+     * @param VerifyPinRequest $request
+     * @return \Illuminate\Http\JsonResponse|void
+     */
+    public function verifyPin(VerifyPinRequest $request)
+    {
+        $user = User::where('email', $request->email)
+            ->where('pin_code', $request->pin_code)
+            ->first();
+
+        if($user){
+            Invitation::where('email', $request->email)->delete();
+
+            $user->registered_at = Carbon::now();
+            $user->email_verified_at = Carbon::now();
+            $user->pin_code = null;
+            $user->save();
+
+            return response()->json("Pin code verified successfully", 200);
+        }
     }
 }
