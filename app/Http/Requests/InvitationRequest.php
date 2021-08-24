@@ -26,7 +26,7 @@ class InvitationRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email|unique:invitations'
+            'email' => 'required|email|unique:invitations|unique:users'
         ];
     }
 
@@ -38,7 +38,8 @@ class InvitationRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.unique' => 'Invitation with this email address already requested.'
+            'email.unique' => 'Invitation with this email address already requested or user with
+            this email already exists.'
         ];
     }
 
