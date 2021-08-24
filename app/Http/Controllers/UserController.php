@@ -41,6 +41,11 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     * @throws ValidationException
+     */
     public function login(Request $request)
     {
         $request->validate([
