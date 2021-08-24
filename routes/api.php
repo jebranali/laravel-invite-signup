@@ -22,22 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 //Api authentication
-Route::post('/login', function (Request $request) {
-    $request->validate([
-        'email' => 'required|email',
-        'password' => 'required',
-    ]);
-
-    $user = User::where('email', $request->email)->first();
-
-    if (! $user || ! Hash::check($request->password, $user->password)) {
-        throw ValidationException::withMessages([
-            'email' => ['The provided credentials are incorrect.'],
-        ]);
-    }
-
-    return $user->createToken('token')->plainTextToken;
-})->name('login');
+Route::post('/login', [\App\Http\Controllers\UserController::class,'login'])->name('login');
 
 //Invitation routes
 Route::post('send_invitation',[\App\Http\Controllers\InvitationController::class,'sendInvitation'])
